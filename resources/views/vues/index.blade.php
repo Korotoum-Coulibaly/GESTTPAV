@@ -22,27 +22,35 @@
 </head>
 
 <body>
+
   <div class="container-scroller">
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth px-0">
+     
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo text-center">
                 <img src="./images/Logo_Gestoci_fond_transparent.png" alt="logo">
               </div>
+                      @if(session('error'))
+                          <div class="alert alert-danger" role="alert">
+                              {{ session('error') }}
+                          </div>
+                      @endif
               <h4>Bonjour! commençons</h4>
               <h6 class="font-weight-light">Connectez-vous pour continuer.</h6>
-              <form class="pt-3">
-                <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Nom d'utilisateur">
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Mot de Passe">
-                </div>
-                <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="/TableauDeBord">SE CONNECTER</a>
-                </div>
+              <form class="pt-3" method="POST" action="{{ url('login') }}">
+                    @csrf
+                      <div class="form-group">
+                        <input type="name" name="CodeUser" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Code d'utilisateur" required>
+                      </div>
+                      <div class="form-group">
+                        <input type="password" name="PasswordUser" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Mot de Passe" required>
+                      </div>
+                      <div class="mt-3">
+                      <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SE CONNECTER</button>
+                      </div>
               </form>
             </div>
           </div>

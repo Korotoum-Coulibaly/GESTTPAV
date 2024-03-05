@@ -26,43 +26,27 @@
                                                         <th>Date</th>
                                                         <th>Poste </th>
                                                         <th>Enlevements</th>
-                                                        <th >Depotage </th>
                                                         <th> Citernes </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                @foreach($postes as $key =>$poste)
 
                                                 <tr data-entry-id="">
                                                         <td>28/12/2023</td>
-                                                        <td>Route PCPB</td>
-                                                        <td style="color: #106730; font-weight: 900;">3 050 998</td>
-                                                        <td>0</td>
-                                                        <td>89</td>
+                                                        <td> {{$poste["Poste"]}}</td>
+                                                        <td style="color: #106730; font-weight: 900;"> {{$poste["TotalVolumeEnleve"]}}</td>
+                                                        <td> {{$poste["NumberOfTanks"]}}</td>
                                                 </tr>
-                                                <tr data-entry-id="">
-                                                        <td>28/12/2023</td>
-                                                        <td>Route JET</td>
-                                                        <td style="color: #106730; font-weight: 900;">225 001</td>
-                                                        <td>0</td>
-                                                        <td>5</td>
-                                                </tr>
-                                                <tr data-entry-id="">
-                                                        <td>28/12/2023</td>
-                                                        <td>Route GAZ</td>
-                                                        <td style="color: #106730; font-weight: 900;" >354 400</td>
-                                                        <td>0</td>
-                                                        <td>14</td>
-                                                </tr>
-                                                
-
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
                                </div>
                       </div>
                      
-                       <div class='row'>
-                          <div class="card-body col-md-12">
+                       <div class=''>
+                          <div class="card-body ">
                             <div class="card-header row justify-content-center">
                                     <div id="html" class="">
                                     <button data-toggle="modal" data-target="#formulaire" class="btn btn-primary" > PRODUITS !</button>

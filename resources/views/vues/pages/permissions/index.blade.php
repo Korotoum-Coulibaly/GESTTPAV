@@ -14,7 +14,7 @@
     <div class="card-body">
 
       <div class="col-lg-12 py-4">
-            <a class="btn btn-primary" href="{{ route('permissions.create') }}">Ajouter une permission</a>
+            <a class="btn btn-primary" href="{{ route('Permissions.create') }}">Ajouter une permission</a>
         </div>
         <div class="card-header">
             Liste des permissions
@@ -27,43 +27,36 @@
 
                         </th>
                         <th>ID</th>
-                        <th>Title</th>
                         <th>Permissions</th>
-                        <th>Actions</th>
+                        <!-- <th>Actions</th> -->
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($permissions as $key =>$permission)
+
                         <tr data-entry-id="">
                             <td>
 
                             </td>
                             <td>
-                                1
+                            {{$permission["IdPermission"]}}
                             </td>
                             <td>
-                              
+                            {{$permission["Libelle"]}}
                             </td>
-                          
-                            <td>
-                                
-                            </td>
-                            <td>
-                               
-                            </td>
-                            
-                            <td>
-                                <a class="btn btn-xs btn-primary" href="{{ route('permissions.show', 1) }}">Voir</a>
+                            <!-- <td>
+                                <a class="btn btn-xs btn-primary" href="{{ route('Permissions.show', 1) }}">Voir</a>
 
-                                <a class="btn btn-xs btn-info" href="{{ route('permissions.edit',1) }}">Modifier</a>
+                                <a class="btn btn-xs btn-info" href="{{ route('Permissions.edit',1) }}">Modifier</a>
 
-                                <form action="{{ route('permissions.index') }}" method="GET" onsubmit="return confirm('{{ trans('Voulez-vous vraiment supprimer ?') }}');" style="display: inline-block;">
+                                <form action="{{ route('Permissions.index') }}" method="GET" onsubmit="return confirm('{{ trans('Voulez-vous vraiment supprimer ?') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="Supprimer">
                                 </form>
-                            </td>
+                            </td> -->
                         </tr>
-                    
+                        @endforeach
                 </tbody>
             </table>
         </div>

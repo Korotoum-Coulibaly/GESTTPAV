@@ -13,9 +13,9 @@
 
     <div class="card-body">
 
-      <div class="col-lg-12 py-4">
-            <a class="btn btn-primary" href="{{ route('users.create') }}">Ajouter un utilisateur</a>
-        </div>
+      <!-- <div class="col-lg-12 py-4">
+            <a class="btn btn-primary" href="{{ route('Users.create') }}">Ajouter un utilisateur</a>
+        </div> -->
         <div class="card-header">
             Liste des utilisateurs
         </div>
@@ -26,75 +26,86 @@
                         <th width="10">
 
                         </th>
-                        <th>ID</th>
+                        <!-- <th>ID</th> -->
                         <th>Nom</th>
                         <th>Prenom</th>
                         <th>LoginUser</th>
-                        <th>LibellenUser</th>
+                        <th>LibelleUser</th>
                         <th>Group</th>
-                        <th>CodeUser</th>
-                        <th>Autorisation</th>
-                        <th>Acces</th>
-                        <th>Etat</th>
-                        <th>DateConnect</th>
-                        <th>Ip User</th>
+                        <!-- <th>CodeUser</th> -->
+                        <!-- <th>Autorisation</th> -->
+                        <!-- <th>Acces</th> -->
+                        <!-- <th>Etat</th> -->
+                        <!-- <th>DateConnect</th> -->
+                        <!-- <th>Ip User</th>
                         <th>Machine User</th>
-                        <th>Os User</th>
-                        <th>CodeUser</th>
-                        <th>Actions</th>
+                        <th>Os User</th> -->
+                        <!-- <th>Actions</th> -->
 
                     </tr>
                 </thead>
                 <tbody>
-                        <tr data-entry-id="">
+                @foreach($users as $key =>$user)
+                        <tr data-entry-id="{{ $user["IdUser"] }}">
                             <td>
 
                             </td>
+                            <!-- <td>
+                            {{$user["IdUser"]}}
+                            </td> -->
                             <td>
-                                1
+                            {{$user["NomUser"]}}
                             </td>
                             <td>
-                              Esther Coulibaly 
+                            {{$user["PrenomUser"]}}
                             </td>
                             <td>
+                            {{$user["LoginUser"]}}
                             </td>
                             <td>
+                            {{$user["LibelleUser"]}}
                             </td>
                             <td>
+                            {{$user["GroupId"]}}
+                            </td>
+                            <!-- <td>
+                            {{$user["CodeUser"]}}
                             </td>
                             <td>
+                            {{$user["Autorisation"]}}
                             </td>
                             <td>
+                            {{$user["Acces"]}}
                             </td>
                             <td>
+                            {{$user["Etat"]}}
                             </td>
                             <td>
+                            {{$user["DateConnect"]}}
                             </td>
                             <td>
+                            {{$user["IPUser"]}}
                             </td>
                             <td>
+                            {{$user["MachineUser"]}}
                             </td>
                             <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                            </td>
-                            <td>
-                                <a class="btn btn-xs btn-primary" href="{{ route('users.show', 1) }}">Voir</a>
+                            {{$user["OsUser"]}}
+                            </td> -->
+                            
+                            <!-- <td>
+                                <a class="btn btn-xs btn-primary" href="{{ route('Users.show', 1) }}">Voir</a>
 
-                                <a class="btn btn-xs btn-info" href="{{ route('users.edit',1) }}">Modifier</a>
+                                <a class="btn btn-xs btn-info" href="{{ route('Users.edit',1) }}">Modifier</a>
 
-                                <form action="{{ route('users.index') }}" method="GET" onsubmit="return confirm('{{ trans('Voulez-vous vraiment supprimer ?') }}');" style="display: inline-block;">
+                                <form action="{{ route('Users.index') }}" method="GET" onsubmit="return confirm('{{ trans('Voulez-vous vraiment supprimer ?') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="Supprimer">
                                 </form>
-                            </td>
+                            </td> -->
                         </tr>
-                    
+                        @endforeach
                 </tbody>
             </table>
         </div>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\StatController;
 
 
 /*
@@ -18,26 +19,42 @@ use App\Http\Controllers\GroupController;
 */
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('/TableauDeBord');
+    }
     return view('vues.index');
 });
+
 Route::get('/TableauDeBord', function () {
     return view('vues.pages.samples.Dashboard');
 });
+
 Route::get('/Documentation', function () {
     return view('vues.pages.samples.Documentation');
 });
 Route::get('/Index_Compteur', function () {
     return view('vues.pages.samples.IndexCompteur');
 });
-Route::get('/Statistiques', function () {
-    return view('vues.pages.samples.Statistiques');
-});
+
 Route::get('/Suivi_Temps_Reel', function () {
     return view('vues.pages.samples.Suivie');
 });
 
-Route::resource('users', UserController::class);
 
-Route::resource('permissions', PermissionController::class);
 
-Route::resource('groups', GroupController::class);
+
+
+Route::resource('Users', UserController::class);
+Route::post('login',[UserController::class,'login']);
+Route::get('logout',[UserController::class,'logout']);
+
+Route::resource('Statistiques', StatController::class);
+
+
+Route::resource('Permissions', PermissionController::class);
+
+Route::resource('Groups', GroupController::class);
+
+Route::get('/login', function () {
+    return redirect('/');
+});

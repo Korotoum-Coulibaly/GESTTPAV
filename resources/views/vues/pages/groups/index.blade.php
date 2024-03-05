@@ -14,7 +14,7 @@
     <div class="card-body">
 
       <div class="col-lg-12 py-4">
-            <a class="btn btn-primary" href="{{ route('groups.create') }}">Ajouter un groupe</a>
+            <a class="btn btn-primary" href="{{ route('Groups.create') }}">Ajouter un groupe</a>
         </div>
         <div class="card-header">
             Liste des groupes
@@ -31,31 +31,33 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($groups as $key =>$group)
+
                         <tr data-entry-id="">
                             <td>
 
                             </td>
                             <td>
-                                
+                            {{$group["IdGroup"]}}
                             </td>
                             <td>
-                              
+                            {{$group["Libelle"]}}
                             </td>
             
                             
-                            <td>
-                                <a class="btn btn-xs btn-primary" href="{{ route('groups.show', 1) }}">Voir</a>
+                            <!-- <td>
+                                <a class="btn btn-xs btn-primary" href="{{ route('Groups.show', 1) }}">Voir</a>
 
-                                <a class="btn btn-xs btn-info" href="{{ route('groups.edit',1) }}">Modifier</a>
+                                <a class="btn btn-xs btn-info" href="{{ route('Groups.edit',1) }}">Modifier</a>
 
-                                <form action="{{ route('groups.index') }}" method="GET" onsubmit="return confirm('{{ trans('Voulez-vous vraiment supprimer ?') }}');" style="display: inline-block;">
+                                <form action="{{ route('Groups.index') }}" method="GET" onsubmit="return confirm('{{ trans('Voulez-vous vraiment supprimer ?') }}');" style="display: inline-block;">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" class="btn btn-xs btn-danger" value="Supprimer">
                                 </form>
-                            </td>
+                            </td> -->
                         </tr>
-                    
+                        @endforeach
                 </tbody>
             </table>
         </div>

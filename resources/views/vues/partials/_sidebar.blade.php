@@ -14,7 +14,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/Statistiques">
+        <a class="nav-link" href="{{ route('Statistiques.index') }}">
           <i class="mdi mdi-chart-pie menu-icon"></i>
           <span class="menu-title">Statistiques</span>
         </a>
@@ -34,13 +34,13 @@
     <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('users.index') }}"> Gestion des profils </a>
+                <a class="nav-link" href="{{ route('Users.index') }}"> Gestion des profils </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('permissions.index') }}"> Gestion des permissions </a>
+                <a class="nav-link" href="{{ route('Permissions.index') }}"> Gestion des permissions </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('groups.index') }}"> Gestion des groupes </a>
+                <a class="nav-link" href="{{ route('Groups.index') }}"> Gestion des groupes </a>
             </li>
         </ul>
     </div>

@@ -21,10 +21,10 @@
                       <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Tableau de Bord&nbsp;/</p>
                     </div>
                   </div>
-                  <div class="d-flex justify-content-between align-items-end flex-wrap">
+                  <!-- <div class="d-flex justify-content-between align-items-end flex-wrap">
                  
                     <button class="btn btn-primary mt-2 mt-xl-0">Generer un rapport</button>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -50,15 +50,8 @@
                             <i class="mdi mdi-calendar-heart icon-lg me-3 text-primary"></i>
                             <div class="d-flex flex-column justify-content-around">
                               <small class="mb-1 text-muted">Date de debut</small>
-                              <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle p-0 bg-transparent border-0 text-dark shadow-none font-weight-medium" href="#" role="button" id="dropdownMenuLinkA" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <h5 class="mb-0 d-inline-block">26 Jul 2018</h5>
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLinkA">
-                                  <a class="dropdown-item" href="#">12 Aug 2018</a>
-                                  <a class="dropdown-item" href="#">22 Sep 2018</a>
-                                  <a class="dropdown-item" href="#">21 Oct 2018</a>
-                                </div>
+                              <div >
+                                  <input type="date" id="inputDate" max="yyyy-MM-dd">                                
                               </div>
                             </div>
                           </div>
@@ -66,28 +59,28 @@
                             <i class="mdi mdi-ev-station me-3 icon-lg text-success"></i>
                             <div class="d-flex flex-column justify-content-around">
                               <small class="mb-1 text-muted">Citerne(s) charge</small>
-                              <h5 class="me-2 mb-0">577545</h5>
+                              <h5 class="me-2 mb-0" id="citerne-charge"></h5>
                             </div>
                           </div>
                           <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
                             <i class="mdi mdi-gas-station me-3 icon-lg text-primary"></i>
                             <div class="d-flex flex-column justify-content-around">
-                              <small class="mb-1 text-muted">Citerne(s) en chargement</small>
-                              <h5 class="me-2 mb-0">9833550</h5>
+                              <small class="mb-1 text-muted" >Citerne(s) en chargement</small>
+                              <h5 class="me-2 mb-0" id="citerne-en-chargement"></h5>
                             </div>
                           </div>
                           <div class="d-flex border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
                             <i class="mdi mdi-transit-transfer me-3 icon-lg text-warning"></i>
                             <div class="d-flex flex-column justify-content-around">
                               <small class="mb-1 text-muted">Citerne(s) en attente</small>
-                              <h5 class="me-2 mb-0">2233783</h5>
+                              <h5 class="me-2 mb-0" id="citerne-en-attente"></h5>
                             </div>
                           </div>
                           <div class="d-flex py-3 border-md-right flex-grow-1 align-items-center justify-content-center p-3 item">
                             <i class="mdi mdi-truck me-3 icon-lg text-danger"></i>
                             <div class="d-flex flex-column justify-content-around">
-                              <small class="mb-1 text-muted">Citerne(s) entree</small>
-                              <h5 class="me-2 mb-0">3497843</h5>
+                              <small class="mb-1 text-muted" >Citerne(s) entree</small>
+                              <h5 class="me-2 mb-0" id="citerne-entree"></h5>
                             </div>
                           </div>
                         </div>
@@ -232,5 +225,114 @@
       </div>
       <!-- page-body-wrapper ends -->
  
+
+
+
+
+
+
+
+  <script>
+
+              // Sélection du champ de saisie de la date
+            var inputDate = document.getElementById('inputDate');
+            var citerneChargeElement = document.getElementById('citerne-charge');
+            var citerneEnChargementElement = document.getElementById('citerne-en-chargement');
+            var citerneEnAttenteElement = document.getElementById('citerne-en-attente');
+            var citerneEntreeElement = document.getElementById('citerne-entree');
+
+            // Ajout d'un écouteur d'événement pour détecter les changements de date
+            inputDate.addEventListener('change', function() {
+                // Récupérer la date sélectionnée par l'utilisateur
+                var selectedDate = this.value;
+
+                // Mettre à jour les données en fonction de la date sélectionnée
+                updateValues(selectedDate);
+            });
+
+            // Fonction pour mettre à jour les données en fonction de la date sélectionnée
+            function updateValues(selectedDate) {
+                // logique pour récupérer les valeurs correspondantes à la date sélectionnée
+                // var apiUrl = 'https://apigest.admin-gspm.com/api/' + selectedDate;
+                var apiUrl2 = 'https://apigest.admin-gspm.com/api/Thenumberoftrucksbeingloadedfortheday/' + selectedDate;
+                var apiUrl3 = 'https://apigest.admin-gspm.com/api/Thenumberoftrucksawaitingentry/' + selectedDate;
+                var apiUrl4 = 'https://apigest.admin-gspm.com/api/Thenumberoftrucksbeingloadedandswaitingtobeloaded/' + selectedDate;
+                console.log(apiUrl2);
+            // Effectuer la requête HTTP avec fetch
+            fetch(apiUrl2)
+                .then(response => response.json())
+                .then(data => {
+                  if (data.length > 0) {
+                        // Accéder à la première entrée du tableau et récupérer la valeur de NumberOfTrucksLoading
+                        var numberoftrucksbeingloadedfortheday = data[0].NumberOfTrucksLoading;
+                        console.log(numberoftrucksbeingloadedfortheday);
+
+                        // Afficher les données dans le conteneur approprié
+                        citerneEnChargementElement.innerText = numberoftrucksbeingloadedfortheday;
+                    } 
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des données:', error);
+                    // Gérer l'erreur ici (affichage d'un message d'erreur, etc.)
+                });
+
+            fetch(apiUrl3)
+                .then(response => response.json())
+                .then(data => {
+                  if (data.length > 0) {
+                        // Accéder à la première entrée du tableau et récupérer la valeur de NumberOfTrucksLoading
+                        var numberoftrucksawaitingentry = data[0].NumberOfTrucksLoading;
+                        console.log(numberoftrucksawaitingentry);
+
+                        // Afficher les données dans le conteneur approprié
+                        citerneEnAttenteElement.innerText = numberoftrucksawaitingentry;
+                    } 
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des données:', error);
+                    // Gérer l'erreur ici (affichage d'un message d'erreur, etc.)
+                });
+
+            fetch(apiUrl4)
+                .then(response => response.json())
+                .then(data => {
+                  console.log(data);
+                  if (data.length > 0) {
+                        // Accéder à la première entrée du tableau et récupérer la valeur de NumberOfTrucksLoading
+                        var numberoftrucksbeingloadedandswaitingtobeloaded = data[0].NumberOfTrucksLoading;
+                        console.log(numberoftrucksbeingloadedandswaitingtobeloaded);
+
+                        // Afficher les données dans le conteneur approprié
+                        citerneEntreeElement.innerText = numberoftrucksbeingloadedandswaitingtobeloaded;
+                    } 
+                })
+                .catch(error => {
+                    console.error('Erreur lors de la récupération des données:', error);
+                    // Gérer l'erreur ici (affichage d'un message d'erreur, etc.)
+                });
+          
+            }
+
+  </script>
+
+
+
+<script>
+        // Obtenir la date actuelle
+      var today = new Date();
+
+      // Formater la date au format AAAA-MM-JJ pour l'attribut max
+      var formattedDate = today.toISOString().split('T')[0];
+      document.getElementById('inputDate').max = formattedDate;
+
+</script>
+
+
+
+
+
+
+
+
 
   @include('vues.partials._footer')
